@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azharuddin Khan | iOS Portfolio</title>
+  <meta name="description" content="Portfolio of Azharuddin Khan, Senior iOS Engineer specializing in Swift, SwiftUI, UIKit, Combine, and KMP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg-soft:#121933;
+      --panel:rgba(18,25,51,.72);
+      --text:#eef2ff;
+      --muted:#b7c0e0;
+      --line:rgba(255,255,255,.08);
+      --brand:#7c9cff;
+      --brand-2:#67e8f9;
+      --accent:#a78bfa;
+      --success:#86efac;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:24px;
+      --radius-sm:16px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,156,255,.22), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(103,232,249,.16), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(167,139,250,.18), transparent 30%),
+        linear-gradient(180deg, #09101f 0%, #0b1020 100%);
+      line-height:1.6;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
+    .glass{
+      background:var(--panel);
+      border:1px solid var(--line);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:var(--shadow);
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(11,16,32,.55);
+      border-bottom:1px solid var(--line);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 0;
+      gap:20px;
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.3px;
+      font-size:1.05rem;
+    }
+    .brand span{color:var(--brand-2)}
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .nav-links a:hover{color:var(--text)}
+
+    .hero{
+      padding:72px 0 32px;
+    }
+    .hero-card{
+      border-radius:32px;
+      padding:40px;
+      display:grid;
+      grid-template-columns: 1.35fr .9fr;
+      gap:28px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(124,156,255,.28);
+      background:rgba(124,156,255,.08);
+      color:#d7e0ff;
+      font-size:.92rem;
+      margin-bottom:18px;
+    }
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow:0 0 18px rgba(124,156,255,.65);
+    }
+    h1{
+      margin:0 0 14px;
+      font-size:clamp(2.2rem, 5vw, 4.4rem);
+      line-height:1.04;
+      letter-spacing:-1.8px;
+    }
+    .hero p{
+      margin:0 0 20px;
+      color:var(--muted);
+      font-size:1.03rem;
+      max-width:62ch;
+    }
+    .highlight{
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .cta-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:13px 18px;
+      border-radius:14px;
+      font-weight:700;
+      transition:.2s ease;
+      border:1px solid transparent;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#08111f;
+    }
+    .btn-secondary{
+      border-color:var(--line);
+      color:var(--text);
+      background:rgba(255,255,255,.03);
+    }
+    .btn:hover{transform:translateY(-1px)}
+
+    .hero-side{
+      display:grid;
+      gap:16px;
+    }
+    .metric-card, .contact-card, .section-card, .timeline-item{
+      border-radius:24px;
+    }
+    .metric-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:16px;
+    }
+    .metric-card{
+      padding:20px;
+    }
+    .metric-value{
+      font-size:1.8rem;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+    .metric-label{
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .contact-card{
+      padding:22px;
+    }
+    .contact-list{
+      display:grid;
+      gap:12px;
+    }
+    .contact-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+    }
+    .contact-item span{color:var(--muted); font-size:.92rem}
+    .contact-item strong{font-size:.96rem}
+
+    section{
+      padding:18px 0;
+    }
+    .section-card{
+      padding:28px;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:20px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:1.55rem;
+      letter-spacing:-.6px;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      max-width:58ch;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      color:#e6ebff;
+      font-size:.95rem;
+      font-weight:600;
+    }
+
+    .timeline{
+      display:grid;
+      gap:18px;
+    }
+    .timeline-item{
+      padding:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .timeline-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+    .timeline-top h3{
+      margin:0;
+      font-size:1.1rem;
+    }
+    .company{
+      color:var(--brand-2);
+      font-weight:700;
+      margin-top:4px;
+    }
+    .date{
+      color:var(--muted);
+      font-size:.95rem;
+      white-space:nowrap;
+    }
+    .timeline-item ul{
+      margin:12px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .timeline-item li + li{margin-top:8px}
+
+    .project-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:18px;
+    }
+    .project-card{
+      padding:22px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      display:block;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+      transition:
+        transform .45s cubic-bezier(.22,1,.36,1),
+        border-color .35s ease,
+        box-shadow .45s ease,
+        background .35s ease;
+    }
+    .project-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      background:linear-gradient(135deg, rgba(124,156,255,.35), rgba(103,232,249,.2), rgba(167,139,250,.25));
+      opacity:0;
+      z-index:-1;
+      transition:opacity .4s ease;
+    }
+    .project-card::after{
+      content:"";
+      position:absolute;
+      top:-50%;
+      left:-60%;
+      width:55%;
+      height:200%;
+      background:linear-gradient(105deg, transparent 0%, rgba(255,255,255,.12) 45%, transparent 70%);
+      transform:translateX(-100%) rotate(12deg);
+      transition:transform .65s cubic-bezier(.22,1,.36,1);
+      pointer-events:none;
+    }
+    .project-card:hover{
+      transform:translateY(-8px) scale(1.015);
+      border-color:rgba(124,156,255,.42);
+      background:rgba(18,25,51,.55);
+      box-shadow:
+        0 28px 56px rgba(0,0,0,.42),
+        0 0 0 1px rgba(124,156,255,.18),
+        0 0 48px rgba(124,156,255,.12);
+    }
+    .project-card:hover::before{opacity:1}
+    .project-card:hover::after{transform:translateX(320%) rotate(12deg)}
+    .project-card:focus-visible{
+      outline:2px solid var(--brand-2);
+      outline-offset:3px;
+    }
+    .project-card h3{
+      margin:0 0 8px;
+      font-size:1.08rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .project-card h3 .store-badge{
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(124,156,255,.35);
+      background:rgba(124,156,255,.12);
+      color:var(--brand-2);
+      transition:transform .3s ease, background .3s ease, border-color .3s ease;
+    }
+    .project-card:hover h3 .store-badge{
+      background:rgba(124,156,255,.22);
+      border-color:rgba(103,232,249,.45);
+      transform:scale(1.05);
+    }
+    .project-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+    }
+    .project-card-cta{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:.88rem;
+      font-weight:700;
+      color:var(--brand);
+      transition:color .25s ease, gap .35s cubic-bezier(.22,1,.36,1);
+    }
+    .project-card-cta svg{
+      width:18px;
+      height:18px;
+      flex-shrink:0;
+      transition:transform .35s cubic-bezier(.22,1,.36,1);
+    }
+    .project-card:hover .project-card-cta{
+      color:var(--brand-2);
+      gap:12px;
+    }
+    .project-card:hover .project-card-cta svg{transform:translateX(4px)}
+
+    .achievement-list{
+      display:grid;
+      gap:14px;
+    }
+    .achievement{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      padding:16px 18px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .achievement-badge{
+      min-width:40px;
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(124,156,255,.22), rgba(103,232,249,.2));
+      display:grid;
+      place-items:center;
+      font-size:1.1rem;
+    }
+    .achievement strong{display:block; margin-bottom:4px}
+    .achievement p{margin:0; color:var(--muted)}
+
+    .footer{
+      padding:28px 0 48px;
+      color:var(--muted);
+      text-align:center;
+    }
+    .footer-title{
+      font-weight:600;
+      color:var(--text);
+      letter-spacing:.02em;
+    }
+    .footer-note{
+      margin-top:10px;
+      font-size:.92rem;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    @media (max-width: 960px){
+      .hero-card{
+        grid-template-columns:1fr;
+        padding:28px;
+      }
+      .project-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .container{width:min(calc(100% - 20px), var(--max))}
+      .nav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+      .hero{padding-top:32px}
+      .hero-card, .section-card{padding:20px}
+      .metric-grid{grid-template-columns:1fr}
+      .contact-item{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    body::before{
+      content:"";
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      z-index:0;
+      opacity:.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+    }
+    .nav, .hero, main, footer{position:relative; z-index:1}
+
+    ::selection{
+      background:rgba(124,156,255,.35);
+      color:var(--text);
+    }
+
+    .nav.is-scrolled{
+      background:rgba(8,12,24,.78);
+      box-shadow:0 12px 40px rgba(0,0,0,.25);
+    }
+    .nav-links a{
+      position:relative;
+      padding:4px 0;
+    }
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      height:2px;
+      border-radius:2px;
+      background:linear-gradient(90deg, var(--brand), var(--brand-2));
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .28s ease;
+      opacity:.9;
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after{transform:scaleX(1)}
+
+    @keyframes hero-in{
+      from{
+        opacity:0;
+        transform:translateY(22px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+    @keyframes float-soft{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+    }
+    .hero-card{
+      animation:hero-in .85s cubic-bezier(.22,1,.36,1) both;
+    }
+    .hero-card .eyebrow{
+      animation:float-soft 5s ease-in-out infinite;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:
+        opacity .65s cubic-bezier(.22,1,.36,1),
+        transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.is-visible{
+      opacity:1;
+      transform:none;
+    }
+
+    .section-card.glass,
+    .timeline-item,
+    .project-card,
+    .achievement{
+      transition:
+        box-shadow .35s ease,
+        border-color .35s ease;
+    }
+
+    .chip{
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .chip:hover{
+      transform:translateY(-2px);
+      border-color:rgba(124,156,255,.35);
+      background:rgba(124,156,255,.1);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .hero-card,
+      .hero-card .eyebrow{animation:none}
+      .reveal{
+        opacity:1;
+        transform:none;
+        transition:none;
+      }
+      .project-card,
+      .btn{transition:none}
+      .project-card:hover{transform:none}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Azhar<span>uddin Khan</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+        <div class="hero-card glass">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Senior iOS Engineer • Swift • SwiftUI • KMP</div>
+          <h1>Building fast, scalable, and <span class="highlight">delightful iOS experiences</span>.</h1>
+          <p>
+            I’m Azharuddin Khan, an iOS Developer with 5+ years of experience building seamless mobile applications using Swift, SwiftUI, UIKit, Combine, Swift Concurrency, and scalable architectures like MVVM, MVI, and TCA.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:iamazharuddin10@gmail.com">Contact Me</a>
+            <a class="btn btn-secondary" href="#projects">View Projects</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="metric-grid">
+            <div class="metric-card glass">
+              <div class="metric-value">5+ yrs</div>
+              <div class="metric-label">iOS development experience</div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-value">125K+</div>
+              <div class="metric-label">Daily active users supported</div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-value">99.71%</div>
+              <div class="metric-label">Crash-free sessions maintained</div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-value">Millions</div>
+              <div class="metric-label">App installs impacted</div>
+            </div>
+          </div>
+
+          <div class="contact-card glass">
+            <div class="contact-list">
+              <div class="contact-item">
+                <span>Email</span>
+                <strong><a href="mailto:iamazharuddin10@gmail.com">iamazharuddin10@gmail.com</a></strong>
+              </div>
+              <div class="contact-item">
+                <span>Phone</span>
+                <strong><a href="tel:+917217348553">+91 7217348553</a></strong>
+              </div>
+              <div class="contact-item">
+                <span>LinkedIn</span>
+                <strong><a href="#">LinkedIn</a></strong>
+              </div>
+              <div class="contact-item">
+                <span>GitHub</span>
+                <strong><a href="#">GitHub</a></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="container">
+        <div class="section-card glass reveal">
+          <div class="section-head">
+            <div>
+              <h2>About</h2>
+            </div>
+            <p>
+              I focus on performance, maintainability, and product impact. My recent work spans high-performance SwiftUI UIs, real-time chat, audio/video calling, push notifications, analytics, payments, and scalable app architecture.
+            </p>
+          </div>
+          <div class="chips">
+            <div class="chip">Swift</div>
+            <div class="chip">SwiftUI</div>
+            <div class="chip">UIKit</div>
+            <div class="chip">Combine</div>
+            <div class="chip">Swift Concurrency</div>
+            <div class="chip">MVVM</div>
+            <div class="chip">MVI</div>
+            <div class="chip">TCA</div>
+            <div class="chip">KMP</div>
+            <div class="chip">Firebase</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-card glass reveal">
+          <div class="section-head">
+            <div>
+              <h2>Skills</h2>
+            </div>
+            <p>Strong foundations in native iOS, concurrency, architecture, cross-platform collaboration, and production-grade app development.</p>
+          </div>
+          <div class="chips">
+            <div class="chip">Swift</div>
+            <div class="chip">SwiftUI</div>
+            <div class="chip">UIKit</div>
+            <div class="chip">APNs</div>
+            <div class="chip">Combine</div>
+            <div class="chip">GCD</div>
+            <div class="chip">Memory Management</div>
+            <div class="chip">MVVM</div>
+            <div class="chip">MVC</div>
+            <div class="chip">MVI</div>
+            <div class="chip">Kotlin Multiplatform</div>
+            <div class="chip">Flutter</div>
+            <div class="chip">Firebase</div>
+            <div class="chip">Git</div>
+            <div class="chip">CocoaPods</div>
+            <div class="chip">Swift Package Manager</div>
+            <div class="chip">Xcode</div>
+            <div class="chip">REST APIs</div>
+            <div class="chip">Third-party SDKs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-card glass reveal">
+          <div class="section-head">
+            <div>
+              <h2>Experience</h2>
+            </div>
+            <p>Built and optimized critical mobile features at scale, with a strong focus on product reliability, reactive systems, and performance.</p>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <div class="timeline-top">
+                <div>
+                  <h3>Senior iOS Engineer</h3>
+                  <div class="company">People Interactive</div>
+                </div>
+                <div class="date">Oct 2023 — Present</div>
+              </div>
+              <ul>
+                <li>Resolved production bugs using Firebase Crashlytics and event analysis, maintaining 99.71% crash-free sessions at 125K DAU.</li>
+                <li>Used Combine for WebSocket events, notifications, and timer streams to drive reactive UI updates and centralized business logic.</li>
+                <li>Handled concurrency with Swift Concurrency to avoid race conditions and thread issues.</li>
+                <li>Built high-performance SwiftUI UIs with complex animations and rendering optimizations.</li>
+                <li>Developed real-time chat, audio/video calling, VoIP push notifications, CallKit integration, and background sync flows.</li>
+              </ul>
+            </article>
+
+            <article class="timeline-item reveal">
+              <div class="timeline-top">
+                <div>
+                  <h3>iOS Engineer</h3>
+                  <div class="company">HealthKart</div>
+                </div>
+                <div class="date">Jan 2020 — Oct 2023</div>
+              </div>
+              <ul>
+                <li>Developed and optimized core modules like Home and Product Detail for performance and scalability, achieving a 99.56% crash-free rate across 10–12K daily users.</li>
+                <li>Migrated legacy codebase from Objective-C to Swift, integrating SwiftUI and MVVM for a cleaner architecture.</li>
+                <li>Applied Delegate and Observer patterns for modular communication between components.</li>
+                <li>Improved responsiveness with GCD, DispatchGroups, and caching to reduce redundant API calls.</li>
+                <li>Integrated SDKs for payments, analytics, and health platforms including HealthKit, Google Fit, and Fitbit.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-card glass reveal">
+          <div class="section-head">
+            <div>
+              <h2>Projects</h2>
+            </div>
+            <p>A snapshot of products and modules I’ve worked on across matchmaking, health, and commerce experiences.</p>
+          </div>
+
+          <div class="project-grid">
+            <a class="project-card reveal" href="https://apps.apple.com/us/app/shaadi-com-matchmaking-app/id480093204" target="_blank" rel="noopener noreferrer" aria-label="Shaadi.com on the App Store">
+              <h3>Shaadi.com <span class="store-badge">App Store</span></h3>
+              <p>Worked on Swift, SwiftUI, Kotlin Multiplatform, and MVVM-based flows. Integrated chat, calling, in-app purchases, and fixed critical memory retain cycle issues across VoIP, CallKit, payments, analytics, deeplinks, and complex UI modules.</p>
+              <span class="project-card-cta">
+                Open in App Store
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card reveal" href="https://apps.apple.com/in/app/vipshaadi-com/id1073880470" target="_blank" rel="noopener noreferrer" aria-label="VIPShaadi on the App Store">
+              <h3>VIPShaadi.com <span class="store-badge">App Store</span></h3>
+              <p>Built with Flutter and Bloc architecture. Implemented in-app purchase and registration flow experiences.</p>
+              <span class="project-card-cta">
+                Open in App Store
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card reveal" href="https://apps.apple.com/in/app/healthkart/id995933852" target="_blank" rel="noopener noreferrer" aria-label="HealthKart on the App Store">
+              <h3>HealthKart <span class="store-badge">App Store</span></h3>
+              <p>Worked on the complete app journey from architecture to final product using Swift, SwiftUI, and UIKit.</p>
+              <span class="project-card-cta">
+                Open in App Store
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+
+            <a class="project-card reveal" href="https://apps.apple.com/in/app/muscleblaze/id6446626402" target="_blank" rel="noopener noreferrer" aria-label="MuscleBlaze on the App Store">
+              <h3>MuscleBlaze <span class="store-badge">App Store</span></h3>
+              <p>Contributed to major modules including payments, product detail page, and analytics in Flutter.</p>
+              <span class="project-card-cta">
+                Open in App Store
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="container">
+        <div class="section-card glass reveal">
+          <div class="section-head">
+            <div>
+              <h2>Achievements</h2>
+            </div>
+            <p>Recognition earned through architecture leadership, critical delivery, and ownership on large-scale products.</p>
+          </div>
+
+          <div class="achievement-list">
+            <div class="achievement reveal">
+              <div class="achievement-badge">★</div>
+              <div>
+                <strong>Lead Engineer promotion</strong>
+                <p>Promoted within a year for excellence in architecture and critical feature delivery.</p>
+              </div>
+            </div>
+
+            <div class="achievement reveal">
+              <div class="achievement-badge">✓</div>
+              <div>
+                <strong>Scaled product impact</strong>
+                <p>Worked on the Shaadi iOS app with millions of installs and 125K+ daily active users.</p>
+              </div>
+            </div>
+
+            <div class="achievement reveal">
+              <div class="achievement-badge">🏆</div>
+              <div>
+                <strong>Employee of the Quarter</strong>
+                <p>Awarded for leading the successful revamp of the HealthKart app.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-title">© 2026 Azharuddin Khan</div>
+      <div class="footer-note">Senior iOS Engineer · Swift, SwiftUI &amp; native iOS</div>
+    </div>
+  </footer>
+
+  <!-- Visitor email: create a free access key at https://web3forms.com and paste it below. Emails go to the address you register there. -->
+  <script>
+    (function () {
+      var WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE";
+
+      var nav = document.querySelector(".nav");
+      if (nav) {
+        var onScroll = function () {
+          nav.classList.toggle("is-scrolled", window.scrollY > 12);
+        };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        var revealEls = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window && revealEls.length) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("is-visible");
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+          );
+          revealEls.forEach(function (el) {
+            io.observe(el);
+          });
+        } else {
+          revealEls.forEach(function (el) {
+            el.classList.add("is-visible");
+          });
+        }
+      } else {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+
+      var key = (WEB3FORMS_ACCESS_KEY || "").trim();
+      if (!key || key.indexOf("YOUR_ACCESS") !== -1) return;
+
+      var storageKey = "portfolio_visit_ping_v1";
+      var now = Date.now();
+      var last = 0;
+      try {
+        last = parseInt(localStorage.getItem(storageKey) || "0", 10) || 0;
+      } catch (e) {
+        last = 0;
+      }
+      var cooldownMs = 24 * 60 * 60 * 1000;
+      if (now - last < cooldownMs) return;
+
+      var lines = [
+        "Someone opened your portfolio.",
+        "",
+        "Time (local): " + new Date().toString(),
+        "Page: " + location.href,
+        "Referrer: " + (document.referrer || "(direct / none)"),
+        "Language: " + (navigator.language || ""),
+        "Viewport: " + window.innerWidth + "×" + window.innerHeight,
+        "Device memory (GB): " + (navigator.deviceMemory || "n/a"),
+        "Connection: " + (navigator.connection && navigator.connection.effectiveType ? navigator.connection.effectiveType : "n/a")
+      ];
+      var payload = {
+        access_key: key,
+        subject: "Portfolio visit — " + new Date().toISOString().slice(0, 10),
+        from_name: "Portfolio visitor ping",
+        message: lines.join("\n")
+      };
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) {
+          return r.json().catch(function () {
+            return {};
+          });
+        })
+        .then(function (data) {
+          if (data && data.success) {
+            try {
+              localStorage.setItem(storageKey, String(now));
+            } catch (e) {}
+          }
+        })
+        .catch(function () {});
+    })();
+  </script>
+</body>
+</html>
